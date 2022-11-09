@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => ({
 const CommentInput = (props) => {
   const [body, setBody] = useState();
 
-  const setBody1 = (ev) => {
+  const setBodyState = (ev) => {
     setBody({ body: ev.target.value });
   };
 
@@ -32,7 +32,7 @@ const CommentInput = (props) => {
           className="form-control"
           placeholder="Write a comment..."
           value={body}
-          onChange={setBody1}
+          onChange={setBodyState}
           rows="3"
         ></textarea>
       </div>
