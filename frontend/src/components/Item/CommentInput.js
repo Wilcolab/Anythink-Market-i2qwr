@@ -10,11 +10,11 @@ const mapDispatchToProps = (dispatch) => ({
 const CommentInput = (props) => {
   const [body, setBody] = useState();
 
-  setBody = (ev) => {
+  const setBody1 = (ev) => {
     setBody({ body: ev.target.value });
   };
 
-  createComment = async (ev) => {
+  const createComment = async (ev) => {
     ev.preventDefault();
     agent.Comments.create(props.slug, {
       body: body,
@@ -32,7 +32,7 @@ const CommentInput = (props) => {
           className="form-control"
           placeholder="Write a comment..."
           value={body}
-          onChange={setBody}
+          onChange={setBody1}
           rows="3"
         ></textarea>
       </div>
@@ -48,6 +48,6 @@ const CommentInput = (props) => {
       </div>
     </form>
   );
-}
+};
 
 export default connect(() => ({}), mapDispatchToProps)(CommentInput);
