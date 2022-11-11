@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import { ADD_COMMENT } from "../../constants/actionTypes";
@@ -23,7 +23,10 @@ const CommentInput = (props) => {
     });
     setBody({ body: "" });
   };
-  // }
+
+  useEffect(() => {
+    createComment();
+  }, []);
 
   return (
     <form className="card comment-form m-2" onSubmit={createComment}>
