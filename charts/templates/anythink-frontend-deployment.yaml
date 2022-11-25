@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.frontend.serviceName }}
-  name: {{ .Values.frontend.serviceName }}
+    app: { { .Values.frontend.serviceName } }
+  name: { { .Values.frontend.serviceName } }
 spec:
-  replicas: {{ .Values.frontend.replicaCount }}
+  replicas: { { .Values.frontend.replicaCount } }
   selector:
     matchLabels:
-      app: {{ .Values.frontend.serviceName }}
+      app: { { .Values.frontend.serviceName } }
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: {{ .Values.frontend.serviceName }}
+        app: { { .Values.frontend.serviceName } }
     spec:
       containers:
         - args:
@@ -29,10 +29,10 @@ spec:
             - name: REACT_APP_BACKEND_URL
               value: https://{{ .Release.Namespace }}-api.anythink.market
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
-          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
-          name: {{ .Values.frontend.serviceName }}
+          imagePullPolicy: { { .Values.frontend.image.pullPolicy } }
+          name: { { .Values.frontend.serviceName } }
           ports:
-            - containerPort: {{ .Values.frontend.containerPort }}
+            - containerPort: { { .Values.frontend.containerPort } }
               name: http
               protocol: TCP
           startupProbe:
@@ -49,6 +49,5 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.frontend.resources | nindent 12 }}
+          resources: { { - toYaml .Values.frontend.resources | nindent 12 } }
       restartPolicy: Always
