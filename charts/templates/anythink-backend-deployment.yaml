@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.backend.serviceName }}
-  name: {{ .Values.backend.serviceName }}
+    app: { { .Values.backend.serviceName } }
+  name: { { .Values.backend.serviceName } }
 spec:
-  replicas: {{ .Values.backend.replicaCount }}
+  replicas: { { .Values.backend.replicaCount } }
   selector:
     matchLabels:
-      app: {{ .Values.backend.serviceName }}
+      app: { { .Values.backend.serviceName } }
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: {{ .Values.backend.serviceName }}
+        app: { { .Values.backend.serviceName } }
     spec:
       containers:
         - args:
@@ -29,11 +29,11 @@ spec:
             - name: PORT
               value: "{{ .Values.backend.containerPort }}"
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
-          name: {{ .Values.backend.serviceName }}
+          imagePullPolicy: { { .Values.backend.image.pullPolicy } }
+          name: { { .Values.backend.serviceName } }
           ports:
-            - containerPort: {{ .Values.backend.containerPort }}
-              name: http  
+            - containerPort: { { .Values.backend.containerPort } }
+              name: http
               protocol: TCP
           startupProbe:
             httpGet:
@@ -49,6 +49,5 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.backend.resources | nindent 12 }}
+          resources: { { - toYaml .Values.backend.resources | nindent 12 } }
       restartPolicy: Always
