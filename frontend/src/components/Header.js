@@ -49,24 +49,23 @@ const LoggedInView = (props) => {
   );
 };
 
-const Header = (props) => {  
-    return (
-      <nav
-        className="navbar navbar-expand-md navbar-dark"
-        style={{ padding: "0.5rem 2rem" }}
-      >
-        <Link to="/" className="navbar-brand">
-          <img alt="logo" src={logo} />
-        </Link>
+const Header = (props) => {
+  return (
+    <nav
+      className="navbar navbar-expand-md navbar-dark"
+      style={{ padding: "0.5rem 2rem" }}
+    >
+      <Link to="/" className="navbar-brand">
+        <img alt="logo" src={logo} />
+      </Link>
 
-        {props.currentUser ? (
-          <LoggedInView currentUser={props.currentUser} />
-        ) : (
-          <LoggedOutView currentUser={props.currentUser} />
-        )}
-      </nav>
-    );
-
-}
+      {props.currentUser ? (
+        <LoggedInView currentUser={props.currentUser} />
+      ) : (
+        <LoggedOutView currentUser={props.currentUser} />
+      )}
+    </nav>
+  );
+};
 
 export default Header;
