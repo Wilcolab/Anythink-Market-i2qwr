@@ -7,25 +7,25 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
-const CommentInput =(props) => {
-  const {slug, onSubmit, currentUser} = props
-  const [body, setBody] = useState("")
+const CommentInput = (props) => {
+  const { slug, onSubmit, currentUser } = props;
+  const [body, setBody] = useState("");
 
   const setInputBody = (ev) => {
-      // setBody({ body: ev.target.value });
-      setBody(ev.target.value);
+    // setBody({ body: ev.target.value });
+    setBody(ev.target.value);
   };
 
   const createComment = async (ev) => {
-      ev.preventDefault();
-      agent.Comments.create(slug, {
-        body: body,
-      }).then((payload) => {
-        onSubmit(payload);
-      });
-      setBody("");
+    ev.preventDefault();
+    agent.Comments.create(slug, {
+      body: body,
+    }).then((payload) => {
+      onSubmit(payload);
+    });
+    setBody("");
   };
-    
+
   return (
     <form className="card comment-form m-2" onSubmit={createComment}>
       <div className="card-block">
@@ -48,7 +48,7 @@ const CommentInput =(props) => {
         </button>
       </div>
     </form>
-  );  
-}
+  );
+};
 
 export default connect(() => ({}), mapDispatchToProps)(CommentInput);
